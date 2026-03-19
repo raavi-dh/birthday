@@ -97,6 +97,8 @@ body { font-family: 'Bricolage Grotesque', sans-serif; background: var(--cream);
 .submit-btn { width: 100%; background: linear-gradient(135deg, var(--coral), var(--rose)); color: white; font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; padding: 17px; border-radius: 14px; border: none; cursor: pointer; box-shadow: 0 6px 24px rgba(255,77,121,0.25); transition: transform 0.2s, box-shadow 0.2s; margin-top: 8px; }
 .submit-btn:disabled { opacity: 0.7; transform: none; cursor: not-allowed; }
 .deadline-note { text-align: center; font-size: 12px; color: #b09080; margin-top: 14px; }
+.form-error { font-size: 12px; color: #e03020; margin-top: -12px; margin-bottom: 8px; display: none; }
+.form-error.visible { display: block; }
 .success-state { display: none; text-align: center; padding: 36px 16px; }
 .success-state .big-emoji { font-size: 56px; display: block; margin-bottom: 14px; }
 .success-state h3 { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; color: var(--dark); margin-bottom: 10px; }
@@ -408,13 +410,14 @@ footer span { color: var(--rose); }
             <label class="option-item"><input type="checkbox" name="diet" value="Dairy-free"><span>&#129371; Dairy-free</span></label>
             <label class="option-item"><input type="checkbox" name="diet" value="None"><span>&#9989; No restrictions</span></label>
           </div>
+          <p class="form-error" id="dietError">Please select at least one option.</p>
         </div>
 
         <div class="field-group">
           <label>Bringing a dish?</label>
           <div class="coming-grid" style="grid-template-columns: 1fr 1fr;">
             <div>
-              <input class="coming-option" type="radio" name="bringing" id="bring-yes" value="Yes">
+              <input class="coming-option" type="radio" name="bringing" id="bring-yes" value="Yes" required>
               <label class="coming-label" for="bring-yes">
                 <span class="emoji">&#127858;</span>
                 <span class="text">Yes!</span>
@@ -433,11 +436,11 @@ footer span { color: var(--rose); }
         <div class="potluck-field" id="dishField">
           <div class="field-group">
             <label>What dish are you bringing?</label>
-            <input type="text" name="dish" placeholder="e.g. Pasta salad, Biryani, Brownies...">
+            <input type="text" name="dish" placeholder="e.g. Pasta salad, Biryani, Brownies..." id="dishName">
           </div>
           <div class="field-group">
             <label>Roughly how many servings?</label>
-            <input type="number" name="servings" placeholder="e.g. 8" min="1">
+            <input type="number" name="servings" placeholder="e.g. 8" min="1" id="dishServings">
           </div>
           <div class="field-group">
             <label>Is the dish...</label>
@@ -563,18 +566,53 @@ function escHtml(str) {
 
 loadTracker();
 
-// Form submit
+// Toggle required on dish fields
+document.querySelectorAll('input[name="bringing"]').forEach(function(r) {
+  r.addEventListener('change', function() {
+    var bringing = r.value === 'Yes' && r.checked;
+    var dishName     = document.getElementById('dishName');
+    var dishServings = document.getElementById('dishServings');
+    if (dishName)     dishName.required     = bringing;
+    if (dishServings) dishServings.required = bringing;
+  });
+});
+
+// Form submit with validation
 document.getElementById('rsvpForm').addEventListener('submit', async function(e) {
   e.preventDefault();
+
+  // Validate diet - at least one must be checked
+  var dietBoxes = this.querySelectorAll('input[name="diet"]:checked');
+  var dietError = document.getElementById('dietError');
+  if (dietBoxes.length === 0) {
+    dietError.classList.add('visible');
+    dietError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  } else {
+    dietError.classList.remove('visible');
+  }
+
+  // Validate dish fields if bringing
+  var bringEl = this.querySelector('input[name="bringing"]:checked');
+  if (bringEl && bringEl.value === 'Yes') {
+    var dishName = document.getElementById('dishName');
+    var dishTypeEl = this.querySelector('input[name="dish_type"]:checked');
+    if (!dishName.value.trim()) {
+      dishName.focus();
+      return;
+    }
+    if (!dishTypeEl) {
+      document.getElementById('dishField').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+  }
+
   var btn = this.querySelector('.submit-btn');
   btn.textContent = 'Sending...';
   btn.disabled = true;
 
-  var dietBoxes = this.querySelectorAll('input[name="diet"]:checked');
   var dietValues = Array.from(dietBoxes).map(function(i) { return i.value; }).join(', ');
-
   var attEl      = this.querySelector('input[name="attending"]:checked');
-  var bringEl    = this.querySelector('input[name="bringing"]:checked');
   var dishTypeEl = this.querySelector('input[name="dish_type"]:checked');
   var dishEl     = this.querySelector('input[name="dish"]');
   var servingsEl = this.querySelector('input[name="servings"]');
@@ -599,7 +637,6 @@ document.getElementById('rsvpForm').addEventListener('submit', async function(e)
     });
     document.getElementById('rsvpForm').style.display = 'none';
     document.getElementById('successState').style.display = 'block';
-    // Refresh tracker after RSVP
     setTimeout(loadTracker, 1500);
   } catch(err) {
     btn.textContent = 'Network error. Try again.';
