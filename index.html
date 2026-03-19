@@ -102,6 +102,48 @@ body { font-family: 'Bricolage Grotesque', sans-serif; background: var(--cream);
 .success-state h3 { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; color: var(--dark); margin-bottom: 10px; }
 .success-state p { font-size: 14px; color: #9a7a6a; line-height: 1.7; }
 
+/* Venue note */
+.venue-note { display: flex; align-items: flex-start; gap: 12px; background: rgba(255,206,58,0.1); border: 1px solid rgba(255,206,58,0.3); border-radius: 14px; padding: 16px 18px; max-width: 860px; margin: 20px auto 0; }
+.venue-note-icon { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
+.venue-note p { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.65; }
+
+/* Food section */
+.potluck-inner { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
+.food-header { text-align: center; padding-bottom: 4px; }
+.food-title { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; color: #0a3d2b; letter-spacing: -0.5px; margin-bottom: 6px; }
+.food-subtitle { font-size: 13px; color: #3a7060; }
+
+.our-food-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.our-food-grid-centered { grid-template-columns: 1fr 1fr; max-width: 50%; margin: 0 auto; }
+.our-food-card { background: #edf7f0; border-radius: 14px; padding: 14px 12px; display: flex; align-items: center; gap: 10px; border: 1px solid rgba(10,100,60,0.12); box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+.food-emoji { font-size: 26px; flex-shrink: 0; }
+.food-info { flex: 1; min-width: 0; }
+.food-info strong { display: block; font-size: 13px; font-weight: 600; color: #1a4d30; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.food-info span { font-size: 11px; color: #4a8060; }
+.food-tag { font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 3px 8px; border-radius: 100px; flex-shrink: 0; }
+.food-tag.veg { background: #e8f7ee; color: #1a6b3a; }
+.food-tag.vegan { background: #e0f5ec; color: #0a5c2b; }
+.food-tag.nonveg { background: #fdecea; color: #b03020; }
+
+.suggestions-box { background: #fff8e6; border-radius: 18px; padding: 22px 18px; border: 1px solid rgba(255,206,58,0.3); }
+.suggestions-box h3 { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; color: #5a3d00; margin-bottom: 8px; }
+.suggestions-box p { font-size: 13px; color: #7a5c00; line-height: 1.6; margin-bottom: 14px; }
+.suggestion-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.s-pill { background: rgba(255,206,58,0.2); border: 1px solid rgba(255,206,58,0.4); color: #5a3d00; font-size: 12px; font-weight: 500; padding: 5px 12px; border-radius: 100px; }
+
+.tracker-box { background: var(--dark); border-radius: 18px; padding: 22px 18px; }
+.tracker-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.tracker-header h3 { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; color: white; }
+.live-dot-wrap { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; color: var(--mint); letter-spacing: 1px; text-transform: uppercase; }
+.live-dot { width: 7px; height: 7px; background: var(--mint); border-radius: 50%; animation: pulse 1.6s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.7); } }
+.tracker-list { display: flex; flex-direction: column; gap: 10px; }
+.tracker-row { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 12px 14px; display: flex; align-items: center; gap: 10px; }
+.tracker-dish { flex: 1; min-width: 0; }
+.tracker-dish strong { display: block; font-size: 14px; color: white; font-weight: 600; }
+.tracker-dish span { font-size: 11px; color: rgba(255,255,255,0.45); }
+.tracker-loading, .tracker-empty { font-size: 13px; color: rgba(255,255,255,0.4); text-align: center; padding: 16px 0; }
+
 /* Footer */
 footer { background: var(--dark); padding: 28px 20px; text-align: center; }
 footer p { font-size: 12px; color: rgba(255,255,255,0.3); }
@@ -140,9 +182,15 @@ footer span { color: var(--rose); }
   .detail-card .card-icon { font-size: 28px; }
   .detail-card .card-value { font-size: 14px; }
   .potluck-section { padding: 80px 32px; }
-  .potluck-box { padding: 40px 44px; border-radius: 24px; }
-  .potluck-box h2 { font-size: 34px; }
-  .potluck-box p { font-size: 15px; }
+  .our-food-grid { grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .food-title { font-size: 34px; }
+  .food-subtitle { font-size: 14px; }
+  .our-food-card { padding: 16px 14px; }
+  .food-info strong { font-size: 14px; white-space: normal; }
+  .suggestions-box { padding: 28px 32px; }
+  .suggestions-box h3 { font-size: 22px; }
+  .tracker-box { padding: 28px 32px; }
+  .tracker-header h3 { font-size: 22px; }
   .pill { font-size: 12px; padding: 6px 14px; }
   .form-section { padding: 80px 32px 100px; }
   .form-header { margin-bottom: 44px; }
@@ -181,9 +229,9 @@ footer span { color: var(--rose); }
     <span class="line2">Birthday!</span>
   </h1>
   <p class="hero-sub">Come celebrate with <strong>good food &amp; good people</strong></p>
-  <p class="hero-desc">A cozy birthday lunch. Food for the soul, music in the air, and the warmth of everyone she loves in one room.</p>
+  <p class="hero-desc">A cozy birthday lunch. Good food, good music, and you.</p>
   <div class="cta-group">
-    <a href="#rsvp" class="btn-primary">RSVP Now &#127882;</a>
+    <a href="#rsvp" class="btn-primary">Are you coming? &#127882;</a>
     <a href="#details" class="btn-outline">See Details</a>
   </div>
   <div class="scroll-hint"><div class="scroll-arrow"></div></div>
@@ -201,7 +249,7 @@ footer span { color: var(--rose); }
     <div class="detail-card">
       <span class="card-icon">&#128205;</span>
       <span class="card-label">Where</span>
-      <p class="card-value"><strong>Cafeteria</strong><br>Studentenwohnheim<br>Tannenbusch Mitte, Bonn</p>
+      <p class="card-value"><strong>Cafeteria</strong><br>Hirschberger Str. 58<br>53119 Bonn</p>
     </div>
     <div class="detail-card">
       <span class="card-icon">&#127859;</span>
@@ -214,20 +262,95 @@ footer span { color: var(--rose); }
       <p class="card-value"><strong>Warm &amp; joyful</strong><br>Music, laughter, food for the soul.</p>
     </div>
   </div>
+  <div class="venue-note">
+    <span class="venue-note-icon">&#128222;</span>
+    <p>The cafeteria is inside the building. Please call or text me when you're outside the door and I'll come let you in!</p>
+  </div>
 </section>
 
 <section class="potluck-section">
   <div class="potluck-inner">
-    <div class="potluck-box">
-      <h2>It's a potluck! &#127807;</h2>
-      <p>We'll have plenty of food ready, but if you'd like to bring a dish — homemade or store-bought — you are very welcome. Just mention it in the RSVP so we don't accidentally end up with eight biryanis. <strong>(Actually, eight biryanis sounds perfect.)</strong></p>
-      <div class="note-pills">
-        <span class="pill">&#129321; Veggie-friendly</span>
-        <span class="pill">&#127830; Non-veg welcome as potluck</span>
-        <span class="pill">&#129748; Separate utensils for non-veg</span>
-        <span class="pill">&#127758; All cuisines welcome</span>
+
+    <!-- What we are making -->
+    <div class="food-header">
+      <span class="section-label" style="color:#0a3d2b;">On the menu</span>
+      <h2 class="food-title">What I'm cooking &#127859;</h2>
+      <p class="food-subtitle">These are taken care of, so no need to bring the same!</p>
+    </div>
+
+    <div class="our-food-grid">
+      <div class="our-food-card">
+        <div class="food-info">
+          <strong>Pav Bhaji</strong>
+        </div>
+        <span class="food-tag veg">Veg</span>
+      </div>
+      <div class="our-food-card">
+        <div class="food-info">
+          <strong>Dhokla</strong>
+        </div>
+        <span class="food-tag veg">Veg</span>
+      </div>
+      <div class="our-food-card">
+        <div class="food-info">
+          <strong>Patties</strong>
+        </div>
+        <span class="food-tag veg">Veg</span>
+      </div>
+      <div class="our-food-card">
+        <div class="food-info">
+          <strong>Muffins</strong>
+        </div>
+        <span class="food-tag veg">Veg</span>
       </div>
     </div>
+    <div class="our-food-grid our-food-grid-centered">
+      <div class="our-food-card">
+        <div class="food-info">
+          <strong>Cookies</strong>
+        </div>
+        <span class="food-tag veg">Veg</span>
+      </div>
+      <div class="our-food-card">
+        <div class="food-info">
+          <strong>Chai</strong>
+        </div>
+        <span class="food-tag veg">Veg</span>
+      </div>
+    </div>
+
+    <!-- Suggestions -->
+    <div class="suggestions-box">
+      <h3>What would be lovely to have &#128522;</h3>
+      <p>If you'd like to bring something, here are a few ideas. Please keep it vegetarian - eggs are fine, vegan is great if possible!</p>
+      <div class="suggestion-pills">
+        <span class="s-pill">&#127834; A rice dish</span>
+        <span class="s-pill">&#129381; Raita or fresh salad</span>
+        <span class="s-pill">&#129380; Cold drinks / juice</span>
+        <span class="s-pill">&#127863; Namkeen or chips</span>
+        <span class="s-pill">&#127856; Any dessert</span>
+        <span class="s-pill">&#127758; Something from your culture!</span>
+      </div>
+    </div>
+
+    <!-- Live tracker -->
+    <div class="tracker-box">
+      <div class="tracker-header">
+        <h3>What people are bringing &#128202;</h3>
+        <span class="live-dot-wrap"><span class="live-dot"></span> Live</span>
+      </div>
+      <div id="trackerList" class="tracker-list">
+        <p class="tracker-loading">Loading...</p>
+      </div>
+    </div>
+
+    <div class="note-pills" style="margin-top:0;">
+      <span class="pill">&#129321; Please keep it vegetarian</span>
+      <span class="pill">&#129361; No meat, chicken, or fish please</span>
+      <span class="pill">&#129370; Eggs are fine</span>
+      <span class="pill">&#127758; All cuisines welcome</span>
+    </div>
+
   </div>
 </section>
 
@@ -345,8 +468,8 @@ footer span { color: var(--rose); }
           <textarea name="message" placeholder="A birthday wish, a song request, anything!"></textarea>
         </div>
 
-        <button type="submit" class="submit-btn">Send RSVP &#127881;</button>
-        <p class="deadline-note">Please RSVP by 25th March &middot; We can't wait to see you!</p>
+        <button type="submit" class="submit-btn">Count me in! &#127881;</button>
+        <p class="deadline-note">Please let us know by 25th March &middot; We can't wait to see you!</p>
       </form>
 
       <div class="success-state" id="successState">
@@ -364,8 +487,8 @@ footer span { color: var(--rose); }
 
 <script>
 // ======================================================
-// STEP 1: Paste your Google Apps Script URL below
-const APPS_SCRIPT_URL = 'REPLACE_WITH_YOUR_APPS_SCRIPT_URL';
+// Paste your Google Apps Script URL below
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyLR3gZi-LhcQoWuH_M_NPq2plUxkRv9K9FVPl9AveG8yJ7DG-8XhYupS8gj-_kzmiT/exec';
 // ======================================================
 
 // Custom cursor
@@ -403,6 +526,39 @@ document.querySelectorAll('input[name="bringing"]').forEach(function(r) {
   });
 });
 
+// Live tracker - fetch potluck entries from Apps Script
+async function loadTracker() {
+  var list = document.getElementById('trackerList');
+  try {
+    var res = await fetch(APPS_SCRIPT_URL + '?action=potluck');
+    var data = await res.json();
+    if (!data.entries || data.entries.length === 0) {
+      list.innerHTML = '<p class="tracker-empty">No one has signed up yet. Be the first!</p>';
+      return;
+    }
+    list.innerHTML = data.entries.map(function(e) {
+      var typeClass = e.dish_type === 'Non-veg' ? 'nonveg' : e.dish_type === 'Vegan' ? 'vegan' : 'veg';
+      var typeLabel = e.dish_type || 'Veg';
+      return '<div class="tracker-row">' +
+        '<div class="tracker-dish">' +
+          '<strong>' + escHtml(e.dish) + '</strong>' +
+          '<span>' + escHtml(e.name) + ' &middot; ~' + escHtml(e.servings) + ' servings</span>' +
+        '</div>' +
+        '<span class="food-tag ' + typeClass + '">' + typeLabel + '</span>' +
+      '</div>';
+    }).join('');
+  } catch(err) {
+    list.innerHTML = '<p class="tracker-empty">Could not load. Check back later!</p>';
+  }
+}
+
+function escHtml(str) {
+  if (!str) return '';
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+loadTracker();
+
 // Form submit
 document.getElementById('rsvpForm').addEventListener('submit', async function(e) {
   e.preventDefault();
@@ -439,6 +595,8 @@ document.getElementById('rsvpForm').addEventListener('submit', async function(e)
     });
     document.getElementById('rsvpForm').style.display = 'none';
     document.getElementById('successState').style.display = 'block';
+    // Refresh tracker after RSVP
+    setTimeout(loadTracker, 1500);
   } catch(err) {
     btn.textContent = 'Network error. Try again.';
     btn.disabled = false;
